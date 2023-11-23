@@ -1,6 +1,13 @@
       <?php
-      include("header.php");
-      $id = $_GET["id"];
+      
+        include("header.php");
+       
+          if(!isset($_SESSION['user_id'])){
+            echo "<script>location.href = 'index.php';</script>";
+            
+          }
+          else{
+         $id = $_GET["id"];
           include("config.php");
           
           $userQuery = "SELECT * FROM users where id = $id";
@@ -13,16 +20,6 @@
             $_SESSION['user_id'] = $data['id'];
             $_SESSION['user_name'] = $data['user_name'];
               echo "<script>location.href = 'index.php';</script>";
-          }
-
-          
-          if(isset($_SESSION['user_id'])){
-            echo "<script>location.href = 'profile.php';</script>"; 
-            
-          }
-          else{
-            echo "<script>location.href = 'index.php';</script>";
-        
           }
         ?>
         <!DOCTYPE html>
@@ -81,6 +78,7 @@
         </main>
         
         <?php
+          
               if(isset($_POST['submit'])){
                 $user_name = $_POST["user_name"];
           $user_email =  $_POST["user_email"];
@@ -95,8 +93,7 @@
 
         echo "<script>location.href = 'index.php';</script>"; 
       }
-      
       include("footer.php");
-
+      }
         ?>
 
